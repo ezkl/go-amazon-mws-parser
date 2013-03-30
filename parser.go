@@ -109,14 +109,13 @@ func Parse(body []byte) (mws Document) {
 	}
 
 	for _, result := range mws.Results {
-		for _, o := range result.Product.Offers {
-			o.ListingPrice = parseMoney(o.ListingPriceString)
-			o.ShippingPrice = parseMoney(o.ShippingPriceString)
+		for k, o := range result.Product.Offers {
+			result.Product.Offers[k].ListingPrice = parseMoney(o.ListingPriceString)
+			result.Product.Offers[k].ShippingPrice = parseMoney(o.ShippingPriceString)
 
-			o.Condition = parseCondition(o.ConditionString)
-			o.Domestic = parseDomestic(o.DomesticString)
-			o.ShippingTime = parseMaxShipping(o.ShippingTimeString)
-
+			result.Product.Offers[k].Condition = parseCondition(o.ConditionString)
+			result.Product.Offers[k].Domestic = parseDomestic(o.DomesticString)
+			result.Product.Offers[k].ShippingTime = parseMaxShipping(o.ShippingTimeString)
 		}
 	}
 
