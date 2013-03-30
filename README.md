@@ -6,4 +6,4 @@ API request and cast it to Go data structures.
 # Usage
 ## TODO
 
-Quickstart: `cat ./data/response.xml | go run product.go`
+Quickstart: `cat ./data/response.xml | go run parser.go`
