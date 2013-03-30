@@ -90,8 +90,8 @@ func parseFeedbackRating(fbStr string) int {
 	}
 
 	if ratingRegex.Match([]byte(fbStr)) {
-		m := ratingRegex.FindAllStringSubmatch(fbStr, 1)
-		i, err := strconv.Atoi(m[0][1])
+		m := ratingRegex.FindStringSubmatch(fbStr)
+		i, err := strconv.Atoi(m[1])
 
 		if err != nil {
 			log.Fatal("Couldn't parse Feedback Rating: ", err)
@@ -137,6 +137,8 @@ func Parse(body []byte) (mws Document) {
 			result.Product.Offers[k].Condition = parseCondition(o.ConditionString)
 			result.Product.Offers[k].Domestic = parseDomestic(o.DomesticString)
 			result.Product.Offers[k].ShippingTime = parseMaxShipping(o.ShippingTimeString)
+
+			result.Product.Offers[k].FeedbackRating = parseFeedbackRating(o.FeedbackRatingString)
 		}
 	}
 
