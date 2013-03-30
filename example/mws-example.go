@@ -11,15 +11,15 @@ func main() {
 	bytes, err := ioutil.ReadAll(os.Stdin)
 
 	if err != nil {
-                fmt.Println(err)
+		fmt.Println(err)
 	}
 
 	doc := parser.Parse(bytes)
 
-        for _,result := range doc.Results {
-                fmt.Println("============", result.ASIN, "============")
-                for _,offer := range result.Product.Offers {
-                        fmt.Println(offer)
-                }
-        }
+	for _, result := range doc.Results {
+		fmt.Println("============", result.ASIN, "============")
+		for _, offer := range result.Product.Offers {
+			fmt.Println(offer)
+		}
+	}
 }
