@@ -23,6 +23,10 @@ func Test_parseCondition(t *testing.T) {
 	if c := parseCondition("VeryGood"); c != 3 {
 		t.Fail()
 	}
+
+	if c := parseCondition("Nonsensical"); c != 5 {
+		t.Fail()
+	}
 }
 
 func Test_parseFeedbackRating(t *testing.T) {
