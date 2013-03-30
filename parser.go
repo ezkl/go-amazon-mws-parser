@@ -82,6 +82,27 @@ func parseDomestic(domStr string) bool {
 	return false
 }
 
+func parseFeedbackRating(fbStr string) int {
+	ratingRegex, err := regexp.Compile(`([\d]+)%$`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if ratingRegex.Match([]byte(fbStr)) {
+		m := ratingRegex.FindAllStringSubmatch(fbStr, 1)
+		i, err := strconv.Atoi(m[0][1])
+
+		if err != nil {
+			log.Fatal("Couldn't parse Feedback Rating: ", err)
+		}
+
+		return i
+	}
+
+	return -1
+}
+
 func parseMaxShipping(shipStr string) int {
 	maxRegex, err := regexp.Compile(`([\d]+) (?:or more)?days$`)
 

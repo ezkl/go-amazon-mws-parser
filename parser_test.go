@@ -25,6 +25,16 @@ func Test_parseCondition(t *testing.T) {
 	}
 }
 
+func Test_parseFeedbackRating(t *testing.T) {
+	if c := parseFeedbackRating("Just Launched"); c != -1 {
+		t.Fail()
+	}
+
+	if c := parseFeedbackRating("98-100%"); c != 100 {
+		t.Fail()
+	}
+}
+
 func Test_Parse(t *testing.T) {
 	bytes, err := ioutil.ReadFile("data/response.xml")
 
@@ -46,7 +56,8 @@ func Test_Parse(t *testing.T) {
 		}
 
 		for _, offer := range result.Product.Offers {
-			if (offer.Condition >= 1) && (offer.Condition <= 5) {
+			if !(offer.Condition >= 1) && !(offer.Condition <= 5) {
+				t.Log("Condition Value: ", offer.Condition)
 				t.Fail()
 			}
 		}
