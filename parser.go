@@ -1,16 +1,16 @@
-package main
+package mwsparser
 
 import (
 	"encoding/xml"
 	"fmt"
+        "io"
 	"io/ioutil"
 	"log"
-	"os"
 	"regexp"
 	"strconv"
 )
 
-type Response struct {
+type Document struct {
 	XMLName xml.Name `xml:"GetLowestOfferListingsForASINResponse"`
 	Results []Result `xml:"GetLowestOfferListingsForASINResult"`
 }
@@ -104,10 +104,12 @@ func parseMaxShipping(shipStr string) int {
 	return 100
 }
 
-func main() {
-	mws := Response{}
+type MWSParser struct {}
 
-	bytes, err := ioutil.ReadAll(os.Stdin)
+func (parser MWSParser) Parse(body io.Reader) {
+	mws := Document{}
+
+	bytes, err := ioutil.ReadAll(body)
 
 	if err != nil {
 		log.Fatal(err)
