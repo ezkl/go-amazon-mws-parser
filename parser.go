@@ -2,9 +2,6 @@ package mwsparser
 
 import (
 	"encoding/xml"
-	"fmt"
-        "io"
-	"io/ioutil"
 	"log"
 	"regexp"
 	"strconv"
@@ -104,23 +101,14 @@ func parseMaxShipping(shipStr string) int {
 	return 100
 }
 
-type MWSParser struct {}
+func Parse(body []byte) (mws Document) {
+	mws = Document{}
 
-func (parser MWSParser) Parse(body io.Reader) {
-	mws := Document{}
-
-	bytes, err := ioutil.ReadAll(body)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if err = xml.Unmarshal(bytes, &mws); err != nil {
+	if err := xml.Unmarshal(body, &mws); err != nil {
 		log.Fatal(err)
 	}
 
 	for _, result := range mws.Results {
-		fmt.Println(result.ASIN)
 		for _, o := range result.Product.Offers {
 			o.ListingPrice = parseMoney(o.ListingPriceString)
 			o.ShippingPrice = parseMoney(o.ShippingPriceString)
@@ -129,9 +117,8 @@ func (parser MWSParser) Parse(body io.Reader) {
 			o.Domestic = parseDomestic(o.DomesticString)
 			o.ShippingTime = parseMaxShipping(o.ShippingTimeString)
 
-			fmt.Println(o)
 		}
 	}
 
-	fmt.Println(mws)
+	return mws
 }
