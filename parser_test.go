@@ -39,6 +39,13 @@ func Test_parseFeedbackRating(t *testing.T) {
 	}
 }
 
+func Test_parseMaxShipping(t *testing.T) {
+        if c:= parseMaxShipping("10 or more days"); c != 10 {
+                t.Log("Incorrect shipping days: ", c)
+                t.Fail()
+        }
+}
+
 func Test_Parse(t *testing.T) {
 	bytes, err := ioutil.ReadFile("data/response.xml")
 
