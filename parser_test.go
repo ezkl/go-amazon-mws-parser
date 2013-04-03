@@ -92,6 +92,16 @@ func Test_Parse(t *testing.T) {
 				t.Fail()
 			}
 
+			if !(offer.ListingPrice >= 0) && !(offer.ListingPrice <= 1000000000) {
+				t.Log("Listing Price: ", offer.ListingPrice)
+				t.Fail()
+			}
+
+			if !(offer.ShippingPrice >= 0) && !(offer.ShippingPrice <= 1000000000) {
+				t.Log("Shipping Price: ", offer.ShippingPrice)
+				t.Fail()
+			}
+
 			if !(offer.ShippingTime >= 2) && !(offer.ShippingTime <= 10) {
 				t.Log("Shipping Time: ", offer.ShippingTime)
 				t.Fail()
