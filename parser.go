@@ -117,6 +117,8 @@ func parseMaxShipping(shipStr string) int {
 			log.Fatal("Couldn't parse Max Shipping: ", err)
 		}
 		return i
+	} else {
+		log.Fatal("No max shipping match!")
 	}
 
 	return 100
