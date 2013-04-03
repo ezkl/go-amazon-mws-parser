@@ -86,7 +86,13 @@ func Test_Parse(t *testing.T) {
 				t.Log("Condition Value: ", offer.Condition)
 				t.Fail()
 			}
+
+			if !(offer.ShippingTime >= 2) && !(offer.ShippingTime <= 10) {
+				t.Log("Shipping Time: ", offer.ShippingTime)
+				t.Fail()
+			}
 		}
+
 	}
 
 }
