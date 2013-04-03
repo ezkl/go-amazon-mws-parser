@@ -91,6 +91,11 @@ func Test_Parse(t *testing.T) {
 				t.Log("Shipping Time: ", offer.ShippingTime)
 				t.Fail()
 			}
+
+			if !(offer.FeedbackRating >= -1) && !(offer.FeedbackRating <= 100) {
+				t.Log("Feedback Rating: ", offer.FeedbackRating)
+				t.Fail()
+			}
 		}
 
 	}
