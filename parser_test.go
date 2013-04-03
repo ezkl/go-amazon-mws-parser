@@ -29,6 +29,16 @@ func Test_parseCondition(t *testing.T) {
 	}
 }
 
+func Test_parseDomestic(t *testing.T) {
+	if c := parseDomestic("True"); c != true {
+		t.Fail()
+	}
+
+	if c := parseDomestic("False"); c != false {
+		t.Fail()
+	}
+}
+
 func Test_parseFeedbackRating(t *testing.T) {
 	if c := parseFeedbackRating("Just Launched"); c != -1 {
 		t.Fail()
