@@ -1,4 +1,4 @@
-# Amazon MWS Products API Parser
+# Amazon MWS Products API Parser ![goci.me status](http://goci.me/project/image/github.com/ezkl/go-amazon-mws-parser "go-amazon-mws-parser build status")
 
 This library will quickly parse the XML response body of an Amazon MWS Products
 API request and cast it to Go data structures.
