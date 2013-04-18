@@ -104,24 +104,23 @@ func parseFeedbackRating(fbStr string) int {
 }
 
 func parseMaxShipping(shipStr string) int {
-	maxRegex, err := regexp.Compile(`([\d]+) (?:or more)?days$`)
+	maxRegex, err := regexp.Compile(`([0-9]+) .*days`)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if maxRegex.Match([]byte(shipStr)) {
-		m := maxRegex.FindAllStringSubmatch(shipStr, 1)
-		i, err := strconv.Atoi(m[0][1])
+		m := maxRegex.FindStringSubmatch(shipStr)
+		i, err := strconv.Atoi(m[1])
+
 		if err != nil {
 			log.Fatal("Couldn't parse Max Shipping: ", err)
 		}
 		return i
-	} else {
-		log.Fatal("No max shipping match!")
 	}
 
-	return 100
+	return -1
 }
 
 func Parse(body []byte) (mws Document) {

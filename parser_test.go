@@ -59,6 +59,11 @@ func Test_parseMaxShipping(t *testing.T) {
 		t.Log("Incorrect shipping days: ", c)
 		t.Fail()
 	}
+
+	if c := parseMaxShipping("8-13 days"); c != 13 {
+		t.Log("Incorrect shipping days: ", c)
+		t.Fail()
+	}
 }
 
 func Test_Parse(t *testing.T) {
